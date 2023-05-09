@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { CIcon } from "@coreui/icons-vue";
@@ -8,12 +8,24 @@ import { useAppStore } from "@/stores";
 
 
 let appStore = useAppStore();
-const { session } = storeToRefs(appStore);
+const { session, users } = storeToRefs(appStore);
 
 let router = useRouter();
 
+let user = ref( {
+  userId: '',
+  password: ''
+})
+let message = ref('');
+
 const signIn = function() {
-  session.value.userId = 'vteial';
+  message.value = '';
+  let euser = users.value[0];
+  if(euser.userId !== user.value.userId || euser.password !== user.value.password) {
+    message.value = 'Invalid credentials...';
+    return;
+  }
+  Object.assign(session.value, euser);
   router.push("/");
 };
 
@@ -28,7 +40,7 @@ onMounted(() => {
   <div class="min-vh-100 d-flex flex-row align-items-center">
     <CContainer>
       <CRow class="justify-content-center">
-        <CCol :md="4">
+        <CCol :md="6">
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
@@ -42,6 +54,7 @@ onMounted(() => {
                     <CFormInput
                       placeholder="Username"
                       autocomplete="username"
+                      v-model="user.userId"
                     />
                   </CInputGroup>
                   <CInputGroup class="mb-4">
@@ -52,6 +65,7 @@ onMounted(() => {
                       type="password"
                       placeholder="Password"
                       autocomplete="current-password"
+                      v-model="user.password"
                     />
                   </CInputGroup>
                   <CRow>
@@ -64,6 +78,8 @@ onMounted(() => {
                       </CButton>
                     </CCol>
                   </CRow>
+                  <br/>
+                  <CAlert color="danger" v-if="message !== ''">{{message}}</CAlert>
                 </CForm>
               </CCardBody>
             </CCard>

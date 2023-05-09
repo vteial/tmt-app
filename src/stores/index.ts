@@ -17,14 +17,27 @@ export const useAppStore = defineStore("appStore", () => {
   }
 
   const session = ref({
-    userId: "-"
+    userId: "-",
+    password: "",
+    name: "",
+    status: ""
   });
+
+  const users = ref([
+    {
+      userId: "userone@gmail.com",
+      password: "pass",
+      name: "User One",
+      status: "active"
+    }
+  ]);
 
   return {
     sideBar,
     toggleSideBarVisibility,
     toggleSideBarCollapse,
-    session
+    session,
+    users
   };
 });
 
