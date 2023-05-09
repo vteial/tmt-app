@@ -14,7 +14,7 @@ onMounted(() => {
 
   setTimeout(() => {
     if (session.value.userId === "-") router.push("/index"); else router.push("/dashboard");
-  }, 2000);
+  }, 1000);
 
   console.log("onMount finished");
 });
