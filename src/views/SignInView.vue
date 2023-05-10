@@ -7,7 +7,7 @@ import { cilLockLocked, cilUser } from "@coreui/icons";
 import { useAppStore } from "@/stores";
 
 let appStore = useAppStore();
-const { session, users } = storeToRefs(appStore);
+const { session } = storeToRefs(appStore);
 
 let router = useRouter();
 

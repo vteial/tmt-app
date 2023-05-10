@@ -45,7 +45,7 @@ export const useAppStore = defineStore("appStore", () => {
     return items;
   }
 
-  const orgs = ref([]);
+  const orgs = ref([] as Organization[]);
 
   return {
     sideBar,
