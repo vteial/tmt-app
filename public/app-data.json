@@ -13,13 +13,13 @@
         "userId": "amazon_user1@gmail.com",
         "name": "Suresh",
         "password": "pass",
-        "role": "Employer"
+        "role": "Employee"
       },
       {
         "id": "amazon_user2@gmail.com",
         "name": "John",
         "password": "pass",
-        "role": "Employer"
+        "role": "Employee"
       }
     ]
   },
@@ -37,13 +37,13 @@
         "userId": "apple_user1@gmail.com",
         "name": "Robert",
         "password": "pass",
-        "role": "Employer"
+        "role": "Employee"
       },
       {
         "userId": "apple_user2@gmail.com",
         "name": "Muthu",
         "password": "pass",
-        "role": "Employer"
+        "role": "Employee"
       }
     ]
   }
