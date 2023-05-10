@@ -27,6 +27,7 @@ const { sideBar } = storeToRefs(appStore);
           My Times
         </router-link>
       </CNavItem>
+      <!--
       <CNavItem>
         <router-link to="/projects" class="nav-link" :class="{ active: $route.name === 'Projects' }">
           <CIcon customClassName="nav-icon" :icon="cilList" />
@@ -51,6 +52,7 @@ const { sideBar } = storeToRefs(appStore);
           Settings
         </router-link>
       </CNavItem>
+      -->
       <CNavItem>
         <router-link to="/sign-out" class="nav-link" :class="{ active: $route.name === 'Sign Out' }">
           <CIcon customClassName="nav-icon" :icon="cilLockLocked" />

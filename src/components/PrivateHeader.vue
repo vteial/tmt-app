@@ -47,6 +47,7 @@ const signOut = function() {
           <CAvatar :src="avatar" size="md" />
         </CDropdownToggle>
         <CDropdownMenu class="pt-0">
+          <!--
           <CDropdownItem>
             <CIcon :icon="cilUser" />
             Profile
@@ -56,9 +57,10 @@ const signOut = function() {
             Settings
           </CDropdownItem>
           <CDropdownDivider />
+          -->
           <CDropdownItem @click="signOut()">
             <CIcon :icon="cilLockLocked" />
-            Logout
+            Sign Out
           </CDropdownItem>
         </CDropdownMenu>
       </CDropdown>

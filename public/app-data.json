@@ -1,0 +1,50 @@
+[
+  {
+    "id": "org_0",
+    "name": "Amazon",
+    "users": [
+      {
+        "userId": "amazon_admin@gmail.com",
+        "name": "Amazon",
+        "password": "pass",
+        "role": "Employer"
+      },
+      {
+        "userId": "amazon_user1@gmail.com",
+        "name": "Suresh",
+        "password": "pass",
+        "role": "Employer"
+      },
+      {
+        "id": "amazon_user2@gmail.com",
+        "name": "John",
+        "password": "pass",
+        "role": "Employer"
+      }
+    ]
+  },
+  {
+    "id": "org_1",
+    "name": "Apple",
+    "users": [
+      {
+        "userId": "apple_admin@gmail.com",
+        "name": "Apple",
+        "password": "pass",
+        "role": "Employer"
+      },
+      {
+        "userId": "apple_user1@gmail.com",
+        "name": "Robert",
+        "password": "pass",
+        "role": "Employer"
+      },
+      {
+        "userId": "apple_user2@gmail.com",
+        "name": "Muthu",
+        "password": "pass",
+        "role": "Employer"
+      }
+    ]
+  }
+]

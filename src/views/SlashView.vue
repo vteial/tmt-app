@@ -12,9 +12,12 @@ let router = useRouter();
 onMounted(() => {
   console.log("onMount started");
 
-  setTimeout(() => {
+  appStore.init().then((res) => {
     if (session.value.userId === "-") router.push("/index"); else router.push("/dashboard");
-  }, 1000);
+  });
+  // setTimeout(() => {
+  //   if (session.value.userId === "-") router.push("/index"); else router.push("/dashboard");
+  // }, 1000);
 
   console.log("onMount finished");
 });

@@ -1,5 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import type { Organization } from "@/types";
+import { appService } from "@/services/app-service";
 
 export const useAppStore = defineStore("appStore", () => {
 
@@ -17,27 +19,42 @@ export const useAppStore = defineStore("appStore", () => {
   }
 
   const session = ref({
-    userId: "-",
-    password: "",
-    name: "",
-    status: ""
+    userId: '-',
+    password: '',
+    name: '',
+    role: '-',
+    organization: '-'
   });
 
-  const users = ref([
-    {
-      userId: "userone@gmail.com",
-      password: "pass",
-      name: "User One",
-      status: "active"
-    }
-  ]);
+
+  async function init(callBack?: Function) {
+    appService.fetchData().then((res) => {
+      // console.log(res);
+      orgs.value = res.data;
+      console.log(orgs.value);
+      if (callBack) callBack();
+    });
+  }
+
+  function getOrganizations() {
+    const items = [] as Organization[];
+    orgs.value.forEach((item) => {
+      // @ts-ignore
+      items.push({ id: item.id, name: item.name } as Organization);
+    });
+    return items;
+  }
+
+  const orgs = ref([]);
 
   return {
     sideBar,
     toggleSideBarVisibility,
     toggleSideBarCollapse,
     session,
-    users
+    init,
+    getOrganizations,
+    orgs,
   };
 });
 

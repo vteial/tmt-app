@@ -17,6 +17,7 @@ const visible = ref(true);
               Home
             </CNavLink>
           </CNavItem>
+          <!--
           <CNavItem>
             <CNavLink href="/landing#features">
               Features
@@ -32,6 +33,7 @@ const visible = ref(true);
               About
             </CNavLink>
           </CNavItem>
+          -->
         </CNavbarNav>
         <CNavbarNav>
           <CNavItem>
@@ -39,11 +41,13 @@ const visible = ref(true);
               Sign In
             </router-link>
           </CNavItem>
+          <!--
           <CNavItem>
             <router-link to="/sign-up" class="nav-link" :class="{ active: $route.name === 'Sign Up' }">
               Sign Up
             </router-link>
           </CNavItem>
+          -->
         </CNavbarNav>
       </CCollapse>
     </CContainer>
