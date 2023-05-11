@@ -15,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <CCard >
+  <CCard id="home">
     <CCardBody>
       <h1>Welcome!</h1>
       <CButton color="primary" @click="signIn()">Sign In</CButton>

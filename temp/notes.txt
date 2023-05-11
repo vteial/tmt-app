@@ -1,0 +1,6 @@
+
+- initialized with static master data done
+- sign-in with organization done
+- app url https://tmt-app-ochre.vercel.app/sign-in
+- static master data url  https://tmt-app-ochre.vercel.app/app-data.json
+- working on task crud

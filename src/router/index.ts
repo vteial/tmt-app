@@ -9,6 +9,7 @@ import SignInView from "@/views/SignInView.vue";
 import PrivateLayout from "@/layouts/PrivateLayout.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import TimesView from "@/views/TimesView.vue";
+import TimeEditView from "@/views/TimeEditView.vue";
 import ProjectsView from "@/views/ProjectsView.vue";
 import ClientsView from "@/views/ClientsView.vue";
 import ProfileView from "@/views/ProfileView.vue";
@@ -62,6 +63,11 @@ const router = createRouter({
           path: "/times",
           name: "Times",
           component: TimesView
+        },
+        {
+          path: "/times/:id/edit",
+          name: "Times - Add/Edit ",
+          component: TimeEditView
         },
         {
           path: "/projects",
