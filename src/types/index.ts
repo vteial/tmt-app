@@ -1,3 +1,10 @@
+export type Task = {
+  id: string
+  description: string
+  startDateTimeText: string
+  endDateTimeText: string
+  status: string
+}
 
 export type User = {
   id: string
@@ -6,6 +13,7 @@ export type User = {
   name: string
   role: string
   orgId: string
+  tasks: Array<Task>
 }
 
 export type Organization = {
@@ -13,3 +21,4 @@ export type Organization = {
   name: string
   users: Array<User>
 }
+

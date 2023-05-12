@@ -42,7 +42,8 @@ const signIn = function() {
     return;
   }
   Object.assign(session.value, usr);
-  session.value.organization = org.name;
+  session.value.orgId = org.id;
+  session.value.orgName = org.name;
   router.push("/");
 };
 

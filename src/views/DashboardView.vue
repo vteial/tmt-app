@@ -17,5 +17,5 @@ onMounted(() => {
 <template>
   <h1>Welcome {{session.name}}!</h1>
   <br/>
-  <h3>{{session.userId}} / {{session.organization}} / {{session.role}}</h3>
+  <h3>{{session.userId}} / {{session.orgName}} / {{session.role}}</h3>
 </template>

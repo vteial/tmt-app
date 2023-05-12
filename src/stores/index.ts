@@ -1,7 +1,9 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import type { Organization } from "@/types";
+import { uid } from "radash";
+import type { Organization, Task } from "@/types";
 import { appService } from "@/services/app-service";
+
 
 export const useAppStore = defineStore("appStore", () => {
 
@@ -19,11 +21,12 @@ export const useAppStore = defineStore("appStore", () => {
   }
 
   const session = ref({
-    userId: '-',
-    password: '',
-    name: '',
-    role: '-',
-    organization: '-'
+    userId: "-",
+    password: "",
+    name: "",
+    role: "-",
+    orgId: "-",
+    orgName: "-"
   });
 
 
@@ -36,6 +39,7 @@ export const useAppStore = defineStore("appStore", () => {
     });
   }
 
+
   function getOrganizations() {
     const items = [] as Organization[];
     orgs.value.forEach((item) => {
@@ -47,14 +51,75 @@ export const useAppStore = defineStore("appStore", () => {
 
   const orgs = ref([] as Organization[]);
 
+  // Task CRUD
+  function createUniqueId() {
+    return uid(8);
+  }
+
+  function getSessionUserFromStorage() {
+    const org = orgs.value.find(item => item.id === session.value.orgId);
+    const user = org?.users.find(item => item.userId === session.value.userId);
+    // @ts-ignore
+    if (!user.tasks) {
+      // @ts-ignore
+      user.tasks = [] as Task[];
+    }
+    return user;
+  }
+
+  function getTasks() {
+    const user = getSessionUserFromStorage();
+    // @ts-ignore
+    return user.tasks;
+  }
+
+  function getTaskById(id: string) {
+    const user = getSessionUserFromStorage();
+    // @ts-ignore
+    return user.tasks.find(item => item.id === id);
+  }
+
+  function saveTask(item: Task) {
+    const user = getSessionUserFromStorage();
+    let task: Task;
+    if (item.id === "-") {
+      task = {
+        id: createUniqueId(),
+        status: "pending"
+      } as Task;
+      // @ts-ignore
+      user.tasks.push(task);
+    } else {
+      // @ts-ignore
+      task = user.tasks.find(o => o.id == item.id);
+    }
+    task.startDateTimeText = item.startDateTimeText;
+    task.endDateTimeText = item.endDateTimeText;
+    task.description = item.description;
+  }
+
+  function removeTask(id: string) {
+    const user = getSessionUserFromStorage();
+    // @ts-ignore
+    const index = user.tasks.findIndex(item => item.id == id);
+    if (index > -1) {
+      // @ts-ignore
+      user.tasks.splice(index, 1);
+    }
+  }
+
   return {
     sideBar,
     toggleSideBarVisibility,
     toggleSideBarCollapse,
+    orgs,
     session,
     init,
     getOrganizations,
-    orgs,
+    getTasks,
+    getTaskById,
+    saveTask,
+    removeTask
   };
 });
 
