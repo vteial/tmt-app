@@ -93,7 +93,9 @@ export const useAppStore = defineStore("appStore", () => {
       // @ts-ignore
       task = user.tasks.find(o => o.id == item.id);
     }
+    task.startDateTime = item.startDateTime;
     task.startDateTimeText = item.startDateTimeText;
+    task.endDateTime = item.endDateTime;
     task.endDateTimeText = item.endDateTimeText;
     task.description = item.description;
   }

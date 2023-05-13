@@ -11,14 +11,15 @@ let route = useRoute();
 let toastService = useToast();
 let appStore = useAppStore();
 
-const dateTime = DateTime.now();
+let dateTime = DateTime.now();
 let item = ref({
   id: "-",
   day: dateTime.day,
-  month: dateTime.monthLong,
+  month: dateTime.month,
+  monthText: dateTime.monthLong,
   year: dateTime.year,
   description: "",
-  status: ""
+  status: "Pending"
 });
 
 function cancel() {
@@ -30,13 +31,22 @@ function save() {
     toastService.error("Provide valid description");
     return;
   }
+
   const task = {
     id: item.value.id,
     description: item.value.description,
-    startDateTimeText: `${item.value.month} ${item.value.day}, ${item.value.year}`,
     status: item.value.status
   } as Task;
+  dateTime = dateTime.set({
+    day: item.value.day,
+    month: item.value.month,
+    year: item.value.year
+  });
+  task.startDateTime = dateTime.toMillis();
+  task.endDateTime = dateTime.toMillis();
+  task.startDateTimeText = dateTime.toLocaleString(DateTime.DATE_MED);
   task.endDateTimeText = task.startDateTimeText;
+
   appStore.saveTask(task);
   toastService.success("Saved successfully...");
   router.push("/times");
@@ -45,10 +55,15 @@ function save() {
 onMounted(() => {
   console.log("onMount started");
   console.log("time-edit");
-  console.log(route.params);
   if (route.params.id && route.params.id !== "-") {
     const task = appStore.getTaskById(route.params.id.toString());
+    console.log(task);
     if (task) {
+      dateTime = DateTime.fromMillis(task.startDateTime);
+      item.value.day = dateTime.day;
+      item.value.month = dateTime.month;
+      item.value.monthText = dateTime.monthLong;
+      item.value.year = dateTime.year;
       item.value.description = task.description;
       item.value.status = task.status;
       item.value.id = task.id;
@@ -61,9 +76,10 @@ onMounted(() => {
 
 <template>
   <CRow>
-    <CCol>
-      <CButton color="info" variant="outline" @click="cancel()">Cancel</CButton>
-      <CButton color="primary" @click="save()" class="float-end">Save</CButton>
+    <CCol class="text-center">
+      <CButton color="info" variant="outline" class="float-start" @click="cancel()">Cancel</CButton>
+      <span class="h4">Id: {{item.id}}</span>
+      <CButton color="primary" class="float-end" @click="save()" >Save</CButton>
     </CCol>
   </CRow>
   <hr />
@@ -76,7 +92,7 @@ onMounted(() => {
         </CCol>
         <CCol md="4">
           <CFormLabel for="taskMonth">Month</CFormLabel>
-          <CFormInput type="text" id="taskDay" v-model="item.month" readonly disabled />
+          <CFormInput type="text" id="taskDay" v-model="item.monthText" readonly disabled />
         </CCol>
         <CCol md="4">
           <CFormLabel for="taskYear">Year</CFormLabel>
@@ -91,9 +107,12 @@ onMounted(() => {
   </CCard>
   <hr />
   <CRow>
-    <CCol>
-      <CButton color="info" variant="outline" @click="cancel()">Cancel</CButton>
-      <CButton color="primary" @click="save()" class="float-end">Save</CButton>
+    <CCol class="text-center">
+      <CButton color="info" variant="outline" class="float-start" @click="cancel()">Cancel</CButton>
+      <span class="h4">
+        Status: <span class="text-uppercase">{{item.status}}</span>
+      </span>
+      <CButton color="primary" class="float-end" @click="save()">Save</CButton>
     </CCol>
   </CRow>
   <!--

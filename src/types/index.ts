@@ -1,7 +1,9 @@
 export type Task = {
   id: string
   description: string
+  startDateTime: number
   startDateTimeText: string
+  endDateTime: number
   endDateTimeText: string
   status: string
 }
