@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { storeToRefs } from "pinia";
 import { useAppStore } from "@/stores";
 
-let appStore = useAppStore();
-const { session } = storeToRefs(appStore);
-
-let router = useRouter();
-
-const signOut = function() {
-  session.value.userId = '-';
-  router.push("/");
-};
+const appStore = useAppStore();
 
 onMounted(() => {
   console.log("onMount started");
-  signOut();
+  appStore.signOut();
   console.log("onMount finished");
 });
 </script>

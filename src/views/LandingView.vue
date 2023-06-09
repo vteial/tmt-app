@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
 import { onMounted } from "vue";
+import { useAppStore } from "@/stores";
 
-let router = useRouter();
+const appStore = useAppStore();
 
-const signIn = function() {
-  router.push("/sign-in");
-}
 onMounted(() => {
   console.log("onMount started");
-  console.log("landing");
+  console.log("landingView");
   console.log("onMount finished");
 });
 </script>
@@ -18,7 +15,7 @@ onMounted(() => {
   <CCard id="home">
     <CCardBody>
       <h1>Welcome!</h1>
-      <CButton color="primary" @click="signIn()">Sign In</CButton>
+      <CButton color="primary" @click="appStore.signIn()">Sign In</CButton>
     </CCardBody>
   </CCard>
   <!--
@@ -58,3 +55,4 @@ onMounted(() => {
     min-height: 500px;
 }
 </style>
+

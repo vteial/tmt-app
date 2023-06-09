@@ -1,8 +1,9 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { uid } from "radash";
-import type { Organization, Task } from "@/types";
+import type { Organization, Session, Task } from "@/types";
 import { appService } from "@/services/app-service";
+import { useAuth0 } from "@auth0/auth0-vue";
 
 
 export const useAppStore = defineStore("appStore", () => {
@@ -19,18 +20,55 @@ export const useAppStore = defineStore("appStore", () => {
   function toggleSideBarCollapse() {
     sideBar.value.collapse = !sideBar.value.collapse;
   }
+  const auth0 = useAuth0();
+
+  const isAuthIsProgress = auth0.isLoading;
+  const isAuthenticated = auth0.isAuthenticated;
 
   const session = ref({
+    accessToken: "-",
     userId: "-",
     password: "",
     name: "",
     role: "-",
     orgId: "-",
     orgName: "-"
-  });
+  } as Session);
+
+  function init() {
+    console.log("isProgress: " + isAuthIsProgress.value + " isSignedIn: " + isAuthenticated.value);
+    const flag = (!isAuthIsProgress.value && isAuthenticated.value);
+    console.log(`flag : ${flag}`);
+    if(!flag) return;
+      auth0.getAccessTokenSilently().then((res) => {
+        console.log(res);
+        console.log(auth0.user.value);
+        // @ts-ignore
+        session.value.accessToken = res;
+        // @ts-ignore
+        session.value.userId = auth0.user.value.email;
+        // @ts-ignore
+        session.value.name = auth0.user.value.name;
+        console.log(session);
+      });
+  }
+
+  function signIn() {
+    auth0.loginWithRedirect();
+  }
+
+  function signOut() {
+    session.value.userId = '-';
+    auth0.logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
+  }
 
 
-  async function init(callBack?: Function) {
+
+  async function initx(callBack?: Function) {
     appService.fetchData().then((res) => {
       // console.log(res);
       orgs.value = res.data;
@@ -38,7 +76,6 @@ export const useAppStore = defineStore("appStore", () => {
       if (callBack) callBack();
     });
   }
-
 
   function getOrganizations() {
     const items = [] as Organization[];
@@ -114,9 +151,14 @@ export const useAppStore = defineStore("appStore", () => {
     sideBar,
     toggleSideBarVisibility,
     toggleSideBarCollapse,
-    orgs,
+    isAuthIsProgress,
+    isAuthenticated,
     session,
+
+    orgs,
     init,
+    signIn,
+    signOut,
     getOrganizations,
     getTasks,
     getTaskById,

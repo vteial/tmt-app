@@ -1,3 +1,5 @@
+
+
 export type Task = {
   id: string
   description: string
@@ -24,3 +26,12 @@ export type Organization = {
   users: Array<User>
 }
 
+export type Session = {
+  userId: string,
+  password: string,
+  accessToken: string
+  name: string,
+  role: string,
+  orgId: string,
+  orgName: string
+}

@@ -1,20 +1,11 @@
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
-import { storeToRefs } from "pinia";
 import { CIcon } from "@coreui/icons-vue";
-import { cilLockLocked, cilMenu, cilSettings, cilUser } from "@coreui/icons";
+import { cilLockLocked, cilMenu } from "@coreui/icons";
 import avatar from "@/assets/images/avatar.png";
 import { useAppStore } from "@/stores";
 
 let appStore = useAppStore();
-const { session } = storeToRefs(appStore);
 
-let router = useRouter();
-
-const signOut = function() {
-  session.value.userId = '-';
-  router.push("/");
-};
 </script>
 
 <template>
@@ -58,7 +49,7 @@ const signOut = function() {
           </CDropdownItem>
           <CDropdownDivider />
           -->
-          <CDropdownItem @click="signOut()">
+          <CDropdownItem @click="appStore.signOut()">
             <CIcon :icon="cilLockLocked" />
             Sign Out
           </CDropdownItem>

@@ -4,3 +4,30 @@
 - app url https://tmt-app-ochre.vercel.app/sign-in
 - static master data url  https://tmt-app-ochre.vercel.app/app-data.json
 - working on task crud
+
+Task 1: Learn GIT basics
+    - https://www.theodinproject.com/lessons/foundations-git-basics
+    - https://gitimmersion.com/
+    - https://learngitbranching.js.org/
+
+Task 2: Learn Shell basics
+    - https://afni.nimh.nih.gov/pub/dist/edu/data/CD.expanded/AFNI_data6/unix_tutorial/misc/unix_commands.html
+    - https://maker.pro/linux/projects/basic-unix-commands-to-work-on-mac-terminal
+    - https://www.learnshell.org/
+
+Task 3: Learn Python basics
+    - https://www.learnpython.org/
+    - https://www.programiz.com/python-programming
+
+Task 4: Learn IDE basics
+    - learn how to use PyChram IDE - https://www.jetbrains.com/pycharm/
+    - leran how to use IntelliJ IDEA Comunity Edition - https://www.jetbrains.com/idea/download/
+
+Task 5: Learn Mac OS basics
+    - https://www.makeuseof.com/tag/macos-beginners-guide/
+    - learn how to use Mac OS - https://edu.gcfglobal.org/en/macosbasics/
+
+
+
+
+
